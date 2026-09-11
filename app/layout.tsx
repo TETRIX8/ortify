@@ -1,10 +1,15 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 
+const geistSans = Geist({ subsets: ['latin', 'cyrillic'], variable: '--font-geist-sans' })
+const geistMono = Geist_Mono({ subsets: ['latin', 'cyrillic'], variable: '--font-geist-mono' })
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Комната просмотра — управляемый плеер',
+  description:
+    'Вставьте ссылку на embed-плеер, и сайт сам достанет поток, покажет его в своём плеере с кнопками управления и живым состоянием.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -26,11 +31,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
+  colorScheme: 'dark',
+  themeColor: '#1b1c20',
 }
 
 export default function RootLayout({
@@ -39,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru" className={`dark bg-background ${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
